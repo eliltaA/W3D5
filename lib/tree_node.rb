@@ -38,12 +38,25 @@ class PolyTreeNode
   def dfs(target_value)
     return self if self.value == target_value   # if node 1 happend to be the target
       self.children.each do |child|
-        found = child.dfs(target_value)
+        found = child.dfs(target_value)  #so that we dont call it again
         return found if found
       end
       return nil
   end
 
-  
+  def bfs(target_value)
+   # return self if self.value == target_value   # if node 1 happend to be the target
+    #chidren = self.children
+    q = Queue.new
+    q.enq(self)
+    until q.empty?
+        current = q.deq
+        return current if current.value == target_value
+        current.children.each do |child|
+        q.enq(child)
+        end
+    end
+    nil
+  end
 
 end
